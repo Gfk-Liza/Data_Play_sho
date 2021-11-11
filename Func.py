@@ -50,7 +50,7 @@ class Function(QtWidgets.QMainWindow):
         
         
     def openFile(self):
-        fileName, _ = QtWidgets.QFileDialog.getOpenFileName(None, 'Open file', '', 'Text file(*.txt)')
+        fileName, _ = QtWidgets.QFileDialog.getOpenFileName(None, '開く', '', 'Text file(*.txt)')
         if fileName == '':
             return
         with open(fileName, mode='r') as f:
@@ -58,7 +58,7 @@ class Function(QtWidgets.QMainWindow):
     
     
     def saveFile(self):
-        fileName, _ = QtWidgets.QFileDialog.getSaveFileName(None, 'Save file', '', 'Text file(*.txt)')
+        fileName, _ = QtWidgets.QFileDialog.getSaveFileName(None, '保存', '', 'Text file(*.txt)')
         if fileName == '':
             return
         with open(fileName, mode='w') as f:
@@ -66,7 +66,7 @@ class Function(QtWidgets.QMainWindow):
     
     
     def saveFile_2(self):
-        fileName, _ = QtWidgets.QFileDialog.getSaveFileName(None, 'Save file', '', 'Text file(*.txt)')
+        fileName, _ = QtWidgets.QFileDialog.getSaveFileName(None, '保存', '', 'Text file(*.txt)')
         if fileName == '':
             return
         with open(fileName, mode='w') as f:
@@ -181,6 +181,7 @@ class FindDialog(Dialog):
         self.button_2.hide()
         self.button_3.hide()
         self.button_5.hide()
+        self.button_6.hide()
         self.label_2.hide()
 
 
@@ -190,6 +191,7 @@ class ReplaceDialog(Dialog):
         self.setWindowTitle('置換')
         self.button_1.hide()
         self.button_5.hide()
+        self.button_6.hide()
         self.label_2.hide()
 
 class Ender(Dialog):
