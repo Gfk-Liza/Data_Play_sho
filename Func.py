@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Nov  8 23:08:28 2021
-
-@author: h268810
+[Mathematica]の代用品
 """
 
 
@@ -12,9 +10,9 @@ import sympy
 from sympy import *
 
 
-class MemoPad(QtWidgets.QMainWindow):
+class Function(QtWidgets.QMainWindow):
     def __init__(self):
-        super(MemoPad, self).__init__()
+        super(Function, self).__init__()
         self.findIndex = -1
         self.resize(1000, 500)
         self.setWindowIcon(QtGui.QIcon('icon.png'))
@@ -56,7 +54,7 @@ class MemoPad(QtWidgets.QMainWindow):
         if fileName == '':
             return
         with open(fileName, mode='r') as f:
-            self.textEdit.setPlainText( f.read() )
+            self.textEdit.setPlainText(f.read())
     
     
     def saveFile(self):
@@ -64,7 +62,16 @@ class MemoPad(QtWidgets.QMainWindow):
         if fileName == '':
             return
         with open(fileName, mode='w') as f:
-            f.write( self.textEdit.toPlainText() )
+            f.write(self.textEdit.toPlainText())
+    
+    
+    def saveFile_2(self):
+        fileName, _ = QtWidgets.QFileDialog.getSaveFileName(None, 'Save file', '', 'Text file(*.txt)')
+        if fileName == '':
+            return
+        with open(fileName, mode='w') as f:
+            f.write(self.textEdit.toPlainText())
+            Function.end_(functions)
     
     
     def findText(self, findText, reverse=False):
@@ -152,12 +159,17 @@ class Dialog(QtWidgets.QDialog):
         self.button_2.clicked.connect(lambda : self.parent().replace(self.lineEdit_0.text(), self.lineEdit_1.text() ))
         self.button_3.clicked.connect(lambda : self.parent().textEdit.replaceAll( self.lineEdit_0.text(), self.lineEdit_1.text() ))
         self.button_4.clicked.connect(lambda : self.reject())
-        self.button_5.clicked.connect(lambda : self.parent().saveFile(self))
+        self.button_5.clicked.connect(self.ends)
         self.button_6.clicked.connect(self.endg)
+    
     
     def endg (self):
         self.close()
         self.parent().end_()
+        
+    def ends(self):
+        self.close()
+        self.parent().saveFile_2()
 
 
 class FindDialog(Dialog):
@@ -183,7 +195,7 @@ class ReplaceDialog(Dialog):
 class Ender(Dialog):
     def __init__(self, parent=None):
         super(Ender, self).__init__(parent)
-        self.setWindowTitle('Func')
+        self.setWindowTitle('Functions')
         self.button_0.hide()
         self.button_1.hide()
         self.button_2.hide()
@@ -197,7 +209,7 @@ class Ender(Dialog):
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    memoPad = MemoPad()
-    memoPad.show()
+    functions = Function()
+    functions.show()
     app.exec()
     
